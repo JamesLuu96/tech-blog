@@ -1,0 +1,33 @@
+<div class="comments">
+  
+  <ul>
+    <h4>Comment Section</h4><i class="far fa-comments"></i>
+    {{#each comments}}
+    <li>
+      <div class="comment-header">
+        {{user.username}} on {{format_date created_at}}
+      </div>
+      <div class="comment-text">
+        {{comment_text}}
+      </div>
+      <div class="comment-like">
+        {{total_likes}} <i class="far fa-thumbs-up like" data-id="{{id}}"></i>
+      </div>
+    </li>
+    {{/each}}
+    {{#if loggedIn}}
+    <li>
+      <form class="comment-form" data-id="{{id}}">
+        <div>
+          <h5>Add Comment</h5>
+          <textarea name="comment-body" required></textarea>
+        </div>    
+        <div>
+          <button type="submit" class="btn btn-dark">add comment</button>
+        </div>
+      </form>
+    </li>
+{{/if}}
+  </ul>
+</div>
+

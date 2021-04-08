@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Comment, User, Post} = require('../../models')
+const {Comment, User, Post, Like} = require('../../models')
 const sequelize = require('../../config/connection')
 
 router.get('/', (req, res)=>{
@@ -28,6 +28,15 @@ router.get('/', (req, res)=>{
             res.status(500).json(err)
         }
     })
+})
+
+router.put('/like', (req, res)=>{
+    if(req.session.loggedIn){
+        req.body.user_id = req.session.user_id
+        Comment.like(req.body, {Like})
+        .then(dbFavoriteData => res.json(dbFavoriteData))
+        .catch(err=>res.json(err))
+    }
 })
 
 router.post('/', (req, res)=>{

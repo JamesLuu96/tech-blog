@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Post, Favorite} = require('../../models')
+const {User, Post, Favorite, Comment} = require('../../models')
 
 
 router.get('/', (req, res)=>{
@@ -39,6 +39,16 @@ router.get('/:id', (req, res)=>{
                     }
                 ],
                 attributes: ['id', 'post_text']
+            },
+            {
+                model: Comment,
+                attributes: ['comment_text'],
+                include: [
+                    {
+                        model: Post,
+                        attributes: ['post_text']
+                    }
+                ]
             }
         ]
     })

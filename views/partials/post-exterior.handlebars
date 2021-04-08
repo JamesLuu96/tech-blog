@@ -1,0 +1,13 @@
+<div class="post">
+    <div class="post-favorite">{{favorite_count}}<i class="fas fa-star favorite" data-id="{{id}}"></i></div>
+    <a href="/post/{{id}}">
+        <div class="post-header">
+            <div class="post-date"><i class="far fa-calendar-alt"></i>{{format_date created_at}}</div>
+        </div>
+        <div class="title">{{post_title}}</div>
+        <div class="post-footer">
+            <div class="user">{{user.username}}</div>
+            <div class="post-comment">{{comment_count}} {{format_plural "comment" comment_count}}</div>
+        </div>
+    </a>
+</div>

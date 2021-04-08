@@ -3,7 +3,7 @@ const sequelize = require('../config/connection')
 
 class Post extends Model{
     static favorite(body, models){
-        return models.Vote.create({
+        return models.Favorite.create({
             user_id: body.user_id,
             post_id: body.post_id
         }).then(()=>{
@@ -32,6 +32,10 @@ Post.init(
             primaryKey: true,
             allowNull: false,
             autoIncrement: true
+        },
+        post_title: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         post_text: {
             type: DataTypes.STRING,

@@ -1,0 +1,25 @@
+<article class="all-posts">
+  {{>post-interior}}
+{{#unless loggedIn}}
+<div class="comment-board">
+  <div class="comment-section">
+    Log in or sign up to leave a comment
+    <div>
+      <button type="button" class="btn btn-outline-info login">Login</button>
+      <button type="button" class="btn btn-info signup">Sign Up</button>
+    </div>
+  </div>
+</div>
+{{/unless}}
+
+
+
+
+
+{{> comments}}
+
+</article>
+
+{{#if loggedIn}}
+<script src="/assets/js/addComment.js"></script>
+{{/if}}

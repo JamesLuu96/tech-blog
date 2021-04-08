@@ -5,6 +5,8 @@ const path = require('path')
 const PORT = process.env.PORT || 3000
 const sequelize = require('./config/connection')
 const session = require('express-session')
+const exphbs  = require('express-handlebars')
+const helpers = require('./utils/helpers')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sess = {
     secret: process.env.SECRET,
@@ -20,6 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(require('./controllers'))
+const hbs = exphbs.create({helpers})
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 sequelize.sync({force: false})
 .then(()=>{

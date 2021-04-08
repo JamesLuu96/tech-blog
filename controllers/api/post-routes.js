@@ -8,6 +8,7 @@ router.get('/', (req, res)=>{
             attributes: 
             [
                 'id',
+                'post_title',
                 'post_text',
                 'created_at',
                 [sequelize.literal('(SELECT COUNT(*) FROM favorite WHERE post.id = favorite.post_id)'), 'favorite_count']
@@ -42,7 +43,7 @@ router.get('/:id', (req, res)=>{
             where: {
                 id: req.params.id
             },
-            attributes: ['id', 'post_text', 'created_at', [sequelize.literal('(SELECT COUNT(*) FROM favorite WHERE post.id = favorite.post_id)'), 'favorite_count']],
+            attributes: ['id', 'post_title', 'post_text', 'created_at', [sequelize.literal('(SELECT COUNT(*) FROM favorite WHERE post.id = favorite.post_id)'), 'favorite_count']],
             include: [
                 {
                     model: User,
@@ -76,6 +77,7 @@ router.post('/', (req, res)=>{
     if(req.session){
         Post.create(
             {
+                post_title: req.body.post_title,
                 post_text: req.body.post_text,
                 user_id: req.session.user_id
             }
@@ -91,15 +93,16 @@ router.post('/', (req, res)=>{
 router.put('/favorite', (req, res)=>{
     if(req.session.user_id){
         req.body.user_id = req.session.user_id
-        Post.favorite(req.body, {Favorite})
-        .then(dbFavoriteData => res.json(dbFavoriteData))
-        .catch(err=>res.json(err))
     }
+    Post.favorite(req.body, {Favorite})
+    .then(dbFavoriteData => res.json(dbFavoriteData))
+    .catch(err=>res.json(err))
 })
 
 router.put('/:id', (req, res)=>{
     Post.update(
         {
+            post_title: req.body.post_title,
             post_text: req.body.post_text
         },
         {

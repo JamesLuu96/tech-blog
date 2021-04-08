@@ -1,7 +1,26 @@
 const {Model, DataTypes} = require('sequelize')
 const sequelize = require('../config/connection')
 
-class Comment extends Model{}
+class Comment extends Model{
+    static like(body, models){
+        return models.Like.create({
+            user_id: body.user_id,
+            comment_id: body.comment_id
+        }).then(()=>{
+            return Comment.findOne({
+                where: {
+                    id: body.comment_id
+                },
+                attributes: [
+                    'id',
+                    'comment_text',
+                    'created_at',
+                    [sequelize.literal('(SELECT COUNT(*) FROM tech_blog.like WHERE tech_blog.like.comment_id = tech_blog.comment.id)'), 'total_likes']
+                ]
+            })
+        })
+    }
+}
 
 Comment.init(
     {
