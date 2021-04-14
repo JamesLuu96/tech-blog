@@ -222,3 +222,7 @@ li.username{
     width: 60%;
     padding: 5px;
 }
+
+.all-posts h4 {
+    margin: 20px;
+}
