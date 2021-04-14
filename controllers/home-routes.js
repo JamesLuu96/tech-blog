@@ -51,7 +51,7 @@ router.get('/post/:id', (req, res)=>{
                     'post_id',
                     'user_id',
                     'created_at',
-                    [sequelize.literal('(SELECT COUNT(*) FROM tech_blog.like WHERE comments.id = like.comment_id)'), 'total_likes']
+                    [sequelize.literal('(SELECT COUNT(*) FROM nma8se88rul01k9i.like WHERE comments.id = like.comment_id)'), 'total_likes']
                 ],
                 include: [
                     {
