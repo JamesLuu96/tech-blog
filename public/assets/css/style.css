@@ -169,6 +169,15 @@ li.username{
     margin: 5px
 }
 
+.create{
+    width: 35%;
+    margin: 0 auto;
+}
+
+.my_user {
+    margin: 10px 0 40px 0;;
+}
+
 .comment-header {
     position: absolute;
     top: 0;

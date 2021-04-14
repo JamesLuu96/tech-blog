@@ -1,5 +1,12 @@
+
 <article class="all-posts">
   {{>post-interior}}
+  {{#if (same_user loggedInUser user.username)}}
+  <div class="my_user">
+    <button class="edit-post btn btn-success">Edit Post</button>
+    <button class="delete-post btn btn-outline-danger">Delete Post</button>
+  </div>
+  {{/if}}
 {{#unless loggedIn}}
 <div class="comment-board">
   <div class="comment-section">

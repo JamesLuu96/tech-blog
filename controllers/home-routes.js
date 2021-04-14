@@ -69,18 +69,48 @@ router.get('/post/:id', (req, res)=>{
     })
 })
 
-router.put('/login', (req,res)=>{
+router.get('/dashboard', (req, res)=>{
+    if(!req.session.loggedIn){
+        res.redirect('/')
+    }
+    Post.findAll({
+        where: {
+            user_id: req.session.user_id
+        },
+        attributes: [
+            'id',
+            'post_title',
+            'post_text',
+            'created_at',
+            [sequelize.literal('(SELECT COUNT(*) FROM favorite WHERE post.id = favorite.post_id)'), 'favorite_count'],
+            [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count']
+        ],
+        include:[
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+    .then(data=>{
+        const posts = data.map(x=>x.get({plain:true}))
+        res.render('dashboard', {posts, loggedIn: req.session.loggedIn}) 
+    })
+    
+})
+
+router.get('/login', (req,res)=>{
     if(req.session.loggedIn){
         res.redirect('/')
     }
-    req.session.save(()=>{
-        req.session.loggedIn = true
-        req.session.username = req.body.username
-        req.session.user_id = req.body.user_id
-        res.json({message:'Success!'})
-        console.log(req.session)
-    })
-    console.log(req.session)
+    res.render('login')
+})
+
+router.get('/signup', (req,res)=>{
+    if(req.session.loggedIn){
+        res.redirect('/')
+    }
+    res.render('signup')
 })
 
 router.put('/logout', (req, res)=>{

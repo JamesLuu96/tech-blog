@@ -67,7 +67,7 @@ router.post('/', (req,res)=>{
         req.session.save(()=>{
             req.session.user_id = data.id
             req.session.username = data.username
-            req.session.loggedIn = loggedIn
+            req.session.loggedIn = true
             res.json(data)
         })
     })
@@ -101,6 +101,10 @@ router.post('/login', (req, res)=>{
         } else{
             res.status(400).json({message: 'Invalid password.'})
         }
+    })
+    .catch((err)=>{
+        console.log(err)
+        res.status(500).json(err)
     })
 })
 

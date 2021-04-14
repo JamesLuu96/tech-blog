@@ -15,5 +15,11 @@ module.exports = {
         .replace('www.', '')
         .split('/')[0]
         .split('?')[0];
+    },
+    same_user: (loggedInUser, username)=>{
+      if(loggedInUser === username){
+        return true
+      }
+      return false
     }
 }

@@ -1,0 +1,22 @@
+<div class="create">
+  <h4>Create New Post:</h4>
+  <form class="form-group">
+    <input class="form-control m-2" type="text" id="post-title" placeholder="Post Title" autocomplete="off" required>
+    <textarea class="form-control m-2" id="post-text" placeholder="Post Body" autocomplete="off" required></textarea>
+    <button class="btn btn-secondary" type="submit">Create Post</button>
+  </form>
+</div>
+
+<article class="all-posts">
+  <h4>My Posts</h4><i class="fas fa-paste"></i>
+  {{#each posts}}
+        {{> post-exterior}}
+  {{/each}}
+  {{#unless posts.length}}
+  <p>No posts made...</p>
+  {{/unless}}
+</article>
+
+<script src="/assets/js/dashboard.js"></script>
+
+

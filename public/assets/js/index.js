@@ -1,12 +1,16 @@
+const signup = document.querySelectorAll('.signup')
+async function signupPage(event){
+    event.preventDefault()
+    document.location.replace('/signup')
+}
+
+signup.forEach(el => {
+    el.addEventListener('click', signupPage)
+})
 const login = document.querySelectorAll('.login')
 async function loginPage(event){
     event.preventDefault()
-    const response = await fetch('/login', {
-        headers: {'Content-Type': 'application/json'},
-        method: 'PUT',
-        body: JSON.stringify({username: 'jwilloughway1', user_id:1})
-    })
-    document.location.reload()
+    document.location.replace('/login')
 }
 
 login.forEach(el => {
