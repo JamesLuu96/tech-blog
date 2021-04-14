@@ -10,7 +10,9 @@ install dependencies using npm i and then make sure your mysql information is co
 sign up or log in to your account, then navigate to the dashboard on the top left and create your post.  
 you can interact with other people by commenting, favorite, or liking their posts/comments.  
 you can also click on other user's to navigate to their profile page.  
-[Click To Go to Live Website](https://tech-blog-james-luu.herokuapp.com/)
+[Click To Go to Live Website](https://tech-blog-james-luu.herokuapp.com/)  
+![tech_blog](https://user-images.githubusercontent.com/32526792/114659381-1fb88000-9cb9-11eb-9bb7-a37d49d1137a.png)  
+![tech_blog2](https://user-images.githubusercontent.com/32526792/114659383-20e9ad00-9cb9-11eb-8f25-1249ecc413b4.png)  
 
 
 ## License
