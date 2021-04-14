@@ -67,6 +67,9 @@ router.get('/post/:id', (req, res)=>{
         // post.loggedIn = req.session.loggedIn
         res.render('single-post', {...post, loggedIn: req.session.loggedIn, loggedInUser: req.session.username})
     })
+    .catch((err)=>{
+        res.status(400).json(err)
+    })
 })
 
 router.get('/dashboard', (req, res)=>{
