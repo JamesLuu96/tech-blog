@@ -1,7 +1,7 @@
 <div class="single-post">
     <div class="post-favorite">{{favorite_count}}<i class="fas fa-star favorite" data-id="{{id}}"></i></div>
     <div class="post-header">
-        <div class="post-date">Posted by {{user.username}} on {{format_date created_at}}</div>
+        <div class="post-date">Posted by <a href="/users/{{user.username}}">{{user.username}}</a> on {{format_date created_at}}</div>
         
     </div>
     <div class="title">{{post_title}}</div>

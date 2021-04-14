@@ -5,7 +5,7 @@
     {{#each comments}}
     <li>
       <div class="comment-header">
-        {{user.username}} on {{format_date created_at}}
+        <a href="/users/{{user.username}}">{{user.username}}</a> on {{format_date created_at}}
       </div>
       <div class="comment-text">
         {{comment_text}}

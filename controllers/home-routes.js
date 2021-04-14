@@ -25,6 +25,44 @@ router.get('/', (req, res)=>{
     })
 })
 
+router.get('/users/:username', (req, res)=>{
+    User.findOne({
+        where: {
+            username: req.params.username
+        }
+    })
+    .then(userData=>{
+        userData = userData.get({plain:true})
+        Post.findAll({
+            where: {
+                user_id: userData.id
+            },
+            attributes: [
+                'id',
+                'post_title',
+                'post_text',
+                'created_at',
+                [sequelize.literal('(SELECT COUNT(*) FROM favorite WHERE post.id = favorite.post_id)'), 'favorite_count'],
+                [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count']
+            ],
+            include:[
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
+        })
+        .then(data=>{
+            const posts = data.map(x=>x.get({plain:true}))
+            console.log(posts)
+            res.render('profile', {posts, loggedIn: req.session.loggedIn, mainUser: req.params.username}) 
+        })
+    })
+    .catch((err)=>{
+        res.status(500).json(err)
+    })
+})
+
 router.get('/post/:id', (req, res)=>{
     Post.findOne({
         where: {

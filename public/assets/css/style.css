@@ -205,3 +205,20 @@ li.username{
     width: 100%;
 }
 
+.box{
+    padding: 40px 80px;
+    width: 50%;
+    margin: 30px auto;
+    border: 1px solid #262b55;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box input {
+    margin-bottom: 6px;
+    width: 60%;
+    padding: 5px;
+}

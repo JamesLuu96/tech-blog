@@ -1,0 +1,9 @@
+<article class="all-posts">
+  <h4>{{mainUser}}'s Posts</h4><i class="fas fa-paste"></i>
+  {{#each posts}}
+        {{> post-exterior}}
+  {{/each}}
+  {{#unless posts.length}}
+  <p>This user has no posts...</p>
+  {{/unless}}
+</article>
